@@ -1,3 +1,10 @@
+first you should create node-modules with following code.
+$ npm i
+
+next you should start the project.
+$ npm start
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
