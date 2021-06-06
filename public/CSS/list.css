@@ -1,0 +1,9 @@
+.table:hover {
+    cursor: pointer;
+}
+.delt{
+    text-decoration: line-through rgb(141, 0, 0);
+}
+table {
+    max-width: 650px;
+}
