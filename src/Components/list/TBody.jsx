@@ -1,13 +1,16 @@
 import React from "react";
-import { Form } from 'react-bootstrap'
-const TBody = ({ id, title, dueDate, thingToDo , handleChecked , Class }) => {
+import { Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { checked } from "../../action/things";
+const TBody = ({ id, title, dueDate, thingToDo, handleChecked, Class }) => {
+  const dispatch = useDispatch();
   return (
     <tbody>
       <tr>
         <td className={Class}>
           <Form.Check
             label={id}
-            onClick={() => handleChecked(id)}
+            onClick={() => dispatch(checked(id))}
             inline
           />
         </td>

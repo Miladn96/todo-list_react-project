@@ -1,16 +1,24 @@
-import React, { useContext } from "react";
+import React  from "react";
 import { Form, Button } from "react-bootstrap";
-import SimpleContext from "../../Context/SimpleContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addThings, onChanged } from "../../action/things";
 const FormGroup = () => {
+const title = useSelector(state => state.title);
+const dueDate = useSelector(state => state.dueDate);
+const singleThing = useSelector(state => state.singleThing);
+const dispatch = useDispatch();
+
+
   const changeNumber = (num) => {
     if (num < 10) return "0" + num;
     else if (num >= 10) return num;
   };
-  const context = useContext(SimpleContext);
   const date = new Date();
   const minDate = `${date.getFullYear()}-${
     changeNumber(date.getMonth() + 1)
   }-${changeNumber(date.getDate())}`;
+
+  
   return (
     <Form onSubmit={(Event) => Event.preventDefault()}>
       <Form.Group>
@@ -18,9 +26,9 @@ const FormGroup = () => {
           <Form.Label>Title :</Form.Label>
           <Form.Control
             type="text"
-            onChange={context.handleOnChanged}
+            onChange={() => dispatch(onChanged())}
             placeholder="Enter Title"
-            value={context.Title}
+            value={title}
             id="title"
           />
         </div>
@@ -28,9 +36,9 @@ const FormGroup = () => {
           <Form.Label>Due Date :</Form.Label>
           <Form.Control
             type="datetime-local"
-            onChange={context.handleOnChanged}
+            onChange={() => dispatch(onChanged())}
             min={minDate}
-            value={context.DueDate}
+            value={dueDate}
             id="due-date"
           />
         </div>
@@ -41,8 +49,8 @@ const FormGroup = () => {
           <Form.Control
             type="textarea"
             placeholder="Enter things to do"
-            onChange={context.handleOnChanged}
-            value={context.SingleThing}
+            onChange={() => dispatch(onChanged())}
+            value={singleThing}
             id="things-to-do"
           />
         </div>
@@ -52,7 +60,7 @@ const FormGroup = () => {
         variant="outline-light"
         size="lg"
         className="button-submit"
-        onClick={context.handleAddThing}
+        onClick={() => dispatch(addThings())}
         block
       >
         Submit

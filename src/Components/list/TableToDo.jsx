@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import {  Table } from "react-bootstrap";
-import SimpleContext from "../../Context/SimpleContext";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { checked } from "../../action/things";
 import TBody from './TBody'
 const TableToDo = () => {
-  const context = useContext(SimpleContext);
-  const { getThings } = context;
+  const things = useSelector(state => state.things);
+  const dispatch = useDispatch();
   return (
     <Table striped bordered hover variant="dark" className="mt-4">
       <thead>
@@ -15,14 +17,14 @@ const TableToDo = () => {
           <th>Things to do</th>
         </tr>
       </thead>
-      {getThings.map((t) => (
+      {things.map((t) => (
         <TBody
             key={t.id}
             id={t.id}
             title={t.title}
             dueDate={t.dueDate}
             thingToDo={t.thingToDo}
-            handleChecked={context.handleChecked}
+            handleChecked={() => dispatch(checked())}
             Class={t.Class}
         />
       ))}
